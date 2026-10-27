@@ -1,4 +1,3 @@
-
 package edu.umg.controlgastos
 
 import android.os.Bundle
@@ -7,6 +6,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import edu.umg.controlgastos.datos.BaseDatos
 import edu.umg.controlgastos.datos.Movimiento
@@ -52,6 +52,10 @@ class MainActivity : AppCompatActivity() {
 
         btnGuardar.setOnClickListener {
             guardarMovimiento()
+        }
+
+        tvHistorial.setOnClickListener {
+            mostrarOpcionesEliminar()
         }
 
         actualizarResumen()
@@ -136,15 +140,21 @@ class MainActivity : AppCompatActivity() {
 
         val saldo = ingresos - gastos
 
-        tvTotalIngresos.text = "Total de ingresos: ${formatearDinero(ingresos)}"
-        tvTotalGastos.text = "Total de gastos: ${formatearDinero(gastos)}"
-        tvSaldo.text = "Saldo disponible: ${formatearDinero(saldo)}"
+        tvTotalIngresos.text =
+            "Total de ingresos: ${formatearDinero(ingresos)}"
+
+        tvTotalGastos.text =
+            "Total de gastos: ${formatearDinero(gastos)}"
+
+        tvSaldo.text =
+            "Saldo disponible: ${formatearDinero(saldo)}"
 
         if (movimientos.isEmpty()) {
-            tvHistorial.text = "Aún no hay movimientos registrados."
+            tvHistorial.text = "Todavía no hay movimientos registrados."
+            tvHistorial.isClickable = false
         } else {
             tvHistorial.text = movimientos.joinToString(
-                separator = "\n\n"
+                separator = "\n\n────────────────────\n\n"
             ) { movimiento ->
 
                 val fecha = SimpleDateFormat(
@@ -155,16 +165,79 @@ class MainActivity : AppCompatActivity() {
                 val signo = if (movimiento.tipo == "INGRESO") {
                     "+"
                 } else {
-                    "-"
+                    "−"
                 }
 
                 "$signo ${movimiento.descripcion}\n" +
                         "Tipo: ${movimiento.tipo}\n" +
                         "Categoría: ${movimiento.categoria}\n" +
-                        "Monto: ${formatearDinero(movimiento.monto)}\n" +
+                        "Importe: ${formatearDinero(movimiento.monto)}\n" +
                         "Fecha: $fecha"
             }
+
+            tvHistorial.isClickable = true
         }
+    }
+
+    private fun mostrarOpcionesEliminar() {
+        val movimientos = baseDatos.obtenerMovimientos()
+
+        if (movimientos.isEmpty()) {
+            Toast.makeText(
+                this,
+                "No hay movimientos para eliminar.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val opciones = movimientos.map { movimiento ->
+            val signo = if (movimiento.tipo == "INGRESO") "+" else "−"
+
+            "$signo ${movimiento.descripcion} — " +
+                    formatearDinero(movimiento.monto)
+        }.toTypedArray()
+
+        AlertDialog.Builder(this)
+            .setTitle("Selecciona un movimiento")
+            .setItems(opciones) { _, posicion ->
+                val movimientoSeleccionado = movimientos[posicion]
+                confirmarEliminacion(movimientoSeleccionado)
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
+    }
+
+    private fun confirmarEliminacion(movimiento: Movimiento) {
+        AlertDialog.Builder(this)
+            .setTitle("Eliminar movimiento")
+            .setMessage(
+                "¿Seguro que deseas eliminar " +
+                        "\"${movimiento.descripcion}\" por " +
+                        "${formatearDinero(movimiento.monto)}?"
+            )
+            .setNegativeButton("Cancelar", null)
+            .setPositiveButton("Eliminar") { _, _ ->
+                val resultado =
+                    baseDatos.eliminarMovimiento(movimiento.id)
+
+                if (resultado > 0) {
+                    Toast.makeText(
+                        this,
+                        "Movimiento eliminado correctamente.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    actualizarResumen()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "No se pudo eliminar el movimiento.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            .show()
     }
 
     private fun formatearDinero(monto: Double): String {

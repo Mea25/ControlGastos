@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F7F5EF"
     android:fillViewport="true"
     tools:context=".MainActivity">
 
@@ -10,139 +11,286 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
+
+        <!-- Encabezado -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BIENVENIDA A TU ESPACIO FINANCIERO"
+            android:textColor="#71847A"
+            android:textSize="11sp"
+            android:letterSpacing="0.08" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginTop="8dp"
             android:text="ControlGastos"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textColor="#174E45"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Controla tus ingresos y gastos"
-            android:textSize="16sp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="28dp"
+            android:text="Tus finanzas, más claras."
+            android:textColor="#718078"
+            android:textSize="15sp" />
+
+        <!-- Resumen -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:text="Resumen financiero"
+            android:textColor="#174E45"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <!-- Ingresos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="#E4F1E6"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="↗  INGRESOS"
+                android:textColor="#26764D"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06" />
+
+            <TextView
+                android:id="@+id/tvTotalIngresos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Total de ingresos: Q 0.00"
+                android:textColor="#174E45"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Gastos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="#F8E9E5"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="↘  GASTOS"
+                android:textColor="#A8423B"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06" />
+
+            <TextView
+                android:id="@+id/tvTotalGastos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Total de gastos: Q 0.00"
+                android:textColor="#913C35"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Saldo disponible -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="#174E45"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✦  SALDO DISPONIBLE"
+                android:textColor="#D9E9DF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06" />
+
+            <TextView
+                android:id="@+id/tvSaldo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Saldo disponible: Q 0.00"
+                android:textColor="#FFFFFF"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Formulario -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nuevo movimiento"
+            android:textColor="#174E45"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Resumen de movimientos"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="16dp"
+            android:text="Registra tus ingresos y gastos."
+            android:textColor="#718078"
+            android:textSize="14sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo de movimiento"
+                android:textColor="#174E45"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rgTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbGasto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:checked="true"
+                    android:text="Gasto"
+                    android:textColor="#A8423B" />
+
+                <RadioButton
+                    android:id="@+id/rbIngreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="18dp"
+                    android:text="Ingreso"
+                    android:textColor="#26764D" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/etDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#A8BDB1"
+                android:hint="Descripción (ej. almuerzo)"
+                android:inputType="textCapSentences"
+                android:minHeight="54dp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#174E45"
+                android:textColorHint="#87968F" />
+
+            <EditText
+                android:id="@+id/etMonto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#A8BDB1"
+                android:hint="Importe en quetzales (Q)"
+                android:inputType="numberDecimal"
+                android:minHeight="54dp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#174E45"
+                android:textColorHint="#87968F" />
+
+            <EditText
+                android:id="@+id/etCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#A8BDB1"
+                android:hint="Categoría (ej. alimentación)"
+                android:inputType="textCapSentences"
+                android:minHeight="54dp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="#174E45"
+                android:textColorHint="#87968F" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="#174E45"
+                android:text="Guardar movimiento  ✓"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Historial -->
         <TextView
-            android:id="@+id/tvTotalIngresos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total de ingresos: Q 0.00"
-            android:textSize="17sp"
-            android:padding="8dp" />
-
-        <TextView
-            android:id="@+id/tvTotalGastos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Total de gastos: Q 0.00"
-            android:textSize="17sp"
-            android:padding="8dp" />
-
-        <TextView
-            android:id="@+id/tvSaldo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Saldo disponible: Q 0.00"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrar movimiento"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tipo de movimiento" />
-
-        <RadioGroup
-            android:id="@+id/rgTipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rbGasto"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:checked="true"
-                android:text="Gasto" />
-
-            <RadioButton
-                android:id="@+id/rbIngreso"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="Ingreso" />
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/etDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Descripción (ej. almuerzo)"
-            android:inputType="textCapSentences"
-            android:minHeight="48dp" />
-
-        <EditText
-            android:id="@+id/etMonto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Monto en quetzales (Q)"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp" />
-
-        <EditText
-            android:id="@+id/etCategoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Categoría (ej. alimentación)"
-            android:inputType="textCapSentences"
-            android:minHeight="48dp" />
-
-        <Button
-            android:id="@+id/btnGuardar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar movimiento"
-            android:layout_marginTop="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="12dp"
             android:text="Historial de movimientos"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="8dp" />
+            android:textColor="#174E45"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvHistorial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:elevation="2dp"
+            android:padding="18dp"
+            android:lineSpacingExtra="3dp"
             android:text="Todavía no hay movimientos registrados."
-            android:textSize="16sp"
-            android:paddingBottom="16dp" />
+            android:textColor="#40554C"
+            android:textSize="14sp" />
+
+        <!-- Pie de página -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:paddingBottom="12dp"
+            android:text="ControlGastos · Organiza, ahorra y avanza"
+            android:textColor="#87968F"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </ScrollView>

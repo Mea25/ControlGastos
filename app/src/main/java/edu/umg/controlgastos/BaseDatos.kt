@@ -79,4 +79,12 @@ class BaseDatos(context: Context) :
 
         return lista
     }
+
+    fun eliminarMovimiento(id: Long): Int {
+        return writableDatabase.delete(
+            "movimientos",
+            "id = ?",
+            arrayOf(id.toString())
+        )
+    }
 }
